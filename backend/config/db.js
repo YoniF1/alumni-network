@@ -1,7 +1,9 @@
-import knex from 'knex'
 import dotenv from 'dotenv'
+import path from 'path'
+const __dirname = import.meta.dirname;
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-dotenv.config()
+import knex from 'knex'
 
 const { connectionString } = process.env
 
