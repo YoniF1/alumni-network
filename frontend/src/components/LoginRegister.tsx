@@ -29,6 +29,7 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
                 }, {withCredentials: true})
 
                 if(response.status === 200) {
+                    setMessage("");
                     console.log(response.data)
                     navigate('/login')
                 }

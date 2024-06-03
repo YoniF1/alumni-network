@@ -5,6 +5,11 @@ export const _register = async({email, password, first_name, last_name}) => {
         const [user] = await db('users').insert({email, password, first_name, last_name}, ["id", "email", "first_name", "last_name"])
         return user;
     } catch (error) {
+        console.log(error)
+        if (error.code === '23505') {
+            console.log("Register", error)
+            throw new Error('This email is already registered')
+        }
         console.log('Error in registering in user model', error)
         throw new Error('Registration failed')
     }

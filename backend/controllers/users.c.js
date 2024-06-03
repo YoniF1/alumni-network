@@ -21,8 +21,11 @@ export const register = async(req, res) => {
             }
         )
         res.json(newUser)
-    } catch (error) {
+    } catch (error) {    
         console.log("register", error)
+        if (error.message === 'This email is already registered') {
+            return res.status(409).json({msg: 'This email is already registered'})
+        }
         res.status(404).json({msg: "Error with registering"})
     }
 }
