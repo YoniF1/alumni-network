@@ -8,14 +8,17 @@ export interface AuthContextType {
 export type UserInterface = {
     id: number;
     email: string;
-    name: string;
+    first_name: string;
+    last_name: string;
     token: string;
+    isadmin: boolean;
   };
   
-
 export interface AuthProviderProps {
     children: ReactNode;
 }
 
-
+export interface HomeProps {
+    children: ReactNode;
+}
 
