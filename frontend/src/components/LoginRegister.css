@@ -1,6 +1,6 @@
-.container {
+.container_login {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
