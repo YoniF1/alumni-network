@@ -1,4 +1,4 @@
-import { _register, _login, _all, _storeRefreshToken, _findUser } from "../models/users.m.js";
+import { _register, _login, _all, _storeRefreshToken, _findUser, _showUser } from "../models/users.m.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -72,7 +72,8 @@ export const login = async(req, res) => {
             id: user.id,
             email: user.email, 
             first_name: user.first_name,
-            last_name: user.last_name
+            last_name: user.last_name,
+            isadmin: user.isadmin
         })
     } catch (error) {
         console.log("login=>", error)
@@ -105,8 +106,6 @@ export const logout = async(req, res) => {
     res.sendStatus(204)
 }
 
-
-
 export const refresh = async(req, res) => {
     const { refreshToken } = req.cookies
 
@@ -134,11 +133,57 @@ export const refresh = async(req, res) => {
 export const all = async(req, res) => {
     try {
         const users = await _all()
-        console.log(users)
         return res.json(users)
-    } catch {
+    } catch (error) {
         console.log("all=>", error)
         res.status(404).json({msg: "Users not found"})
+    }
+}
+
+export const showUser = async(req, res) => {
+    try {
+        const { id } = req.params
+        const user = await _showUser(id)
+        return res.json(user)
+    } catch (error) {
+        console.log("showUser", error)
+        res.status(404).json({msg: "User not found"})
+    }
+}
+
+export const updateUser = async(req, res) => {
+    try {
+        const { id } = req.params
+        let updatedUser = {};
+        console.log('hello')
+
+        
+        if (req.body.cohort) {
+            const cohort = req.body.cohort
+            await db('users').update({cohort_id: cohort}).where({id: id})
+            updatedUser.cohort = cohort
+        }
+
+        if (req.body.step) {
+            const step = req.body.step
+            console.log(step)
+            await db('users').update({step: step}).where({id: id})
+            updatedUser.step = step
+        }
+
+        if (req.body.biography && req.body.profilePictureUrl) {
+            const biography = req.body.biography
+            const profile_picture = req.body.profilePictureUrl
+            
+            await db('users').update({ biography, profile_picture: profile_picture }).where({ id });
+            updatedUser.profile_picture = profile_picture
+            updatedUser.biography = biography
+        }
+
+        res.status(200).json(updatedUser);
+    } catch(error) {
+        console.log("updateUser", error)
+        res.status(500).json({ msg: "Updating user failed" })
     }
 }
 
