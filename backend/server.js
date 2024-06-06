@@ -29,14 +29,14 @@ app.use(userrouter)
 app.use(cohortrouter)
 app.use(filesrouter)
 
+const buildDirectory = path.join(__dirname, '../frontend/build');
+app.use(express.static(buildDirectory));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(buildDirectory, 'index.html'));
+});
+
 app.listen(PORT || 3000, () => {
-        console.log(`Server listening on ${PORT || 3000}`)
-    }
-)
-
-app.use(express.static(path.join(__dirname, "/frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
+  console.log(`Server listening on ${PORT || 3000}`);
 });
 
