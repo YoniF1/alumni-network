@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser'
 
 dotenv.config()
 
-const { FRONTEND_URL } = process.env
+const { FRONTEND_URL, PORT } = process.env
 
 const app = express()
 
@@ -27,7 +27,7 @@ app.use(userrouter)
 app.use(cohortrouter)
 app.use(filesrouter)
 
-app.listen(3000, () => {
-        console.log(`running on port 3000`)
+app.listen(PORT || 3000, () => {
+        console.log(`Server listing on ${PORT || 3000}`)
     }
 )
