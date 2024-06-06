@@ -17,7 +17,7 @@ const Auth = ({children}: AuthProviderProps) => {
     const verify = async () => {
         try {
             if(user) {
-                const response = await axios.get('http://localhost:3000/verify', {withCredentials: true})
+                const response = await axios.get(import.meta.env.BACKEND_URL + '/verify', {withCredentials: true})
                 if (response.status === 200) setRedirect(true)
             } else {
                 setRedirect(false)

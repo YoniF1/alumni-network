@@ -24,7 +24,7 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
     const loginregister = async () => {
         if(page === 'Register') {
             try {
-                const response = await axios.post('http://localhost:3000/register', {
+                const response = await axios.post(import.meta.env.BACKEND_URL + '/register', {
                     email, password, first_name, last_name
                 }, {withCredentials: true})
 
@@ -45,7 +45,7 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
         } else {
             // on login
             try {
-                const response = await axios.post('http://localhost:3000/login', {
+                const response = await axios.post(import.meta.env.BACKEND_URL + '/login', {
                     email, password
                 }, {withCredentials: true})
 

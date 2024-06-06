@@ -44,7 +44,7 @@ const Biography = () => {
     formData.append('profilePicture', profilePicture);
 
     try {
-      const uploadResponse = await axios.post('http://localhost:3000/upload', formData, {
+      const uploadResponse = await axios.post(import.meta.env.BACKEND_URL + '/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
