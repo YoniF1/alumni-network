@@ -10,5 +10,5 @@ const { connectionString } = process.env
 export const db = knex({
     client: 'pg',
     connection: {
-        connectionString: connectionString
+        connectionString: connectionString,
 }});

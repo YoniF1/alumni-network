@@ -71,9 +71,9 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
 
     return(
         <>  
-            <div className='container'>
+            <div className='container_login'>
                 <h1>{page}</h1>
-                <Box component={'form'} sx={{m:1, display:"flex", flexDirection:'column'}} noValidate autoComplete='off'> 
+                <Box component={'form'} sx={{m:1, display:"flex", flexDirection:'column', width: 400}} noValidate autoComplete='off'> 
                     <TextField sx={{m:1}} id="email" type="email" label="Enter your email" onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)} variant="outlined"/>
                     <TextField sx={{m:1}} id="password" type="password" label="Enter your password" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} variant="outlined"/>
                     { page === 'Register' ? (
@@ -83,7 +83,7 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
                     </>
                     ): null}
                 </Box>
-                <Button variant='contained' onClick={loginregister}>
+                <Button sx={{width: 200}} variant='contained' onClick={loginregister}>
                     {page}
                 </Button>
 

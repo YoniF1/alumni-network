@@ -12,7 +12,7 @@ const Auth = ({children}: AuthProviderProps) => {
 
     useEffect(() => {
         verify()
-    }, [])
+    }, [user])
 
     const verify = async () => {
         try {

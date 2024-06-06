@@ -17,7 +17,7 @@ export const _register = async({email, password, first_name, last_name}) => {
 
 export const _login = async (email) => {
     try {
-        const user = await db('users').select('id', 'email', 'password', 'first_name', 'last_name')
+        const user = await db('users').select('id', 'email', 'password', 'first_name', 'last_name', 'isadmin')
         .where({email})
         .first()
         return user || null
@@ -44,6 +44,16 @@ export const _findUser = async(token) => {
         return user || null
     } catch (error){
         console.log('Error finding user with that refresh token', error)
+        throw new Error("User not found")
+    }
+}
+
+export const _showUser = async(id) => {
+    try {
+        const user = await db('users').select('id', 'first_name', 'last_name', 'cohort_id', 'step', 'email', 'profile_picture').where({id}).first()
+        return user || null
+    } catch (error) {
+        console.log("Error finding user with that id", error)
         throw new Error("User not found")
     }
 }
