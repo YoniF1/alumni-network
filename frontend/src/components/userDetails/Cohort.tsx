@@ -23,7 +23,7 @@ const Cohort = () => {
 
   const fetchCohortData = async () => {
     try {
-        const response = await axios.get('http://localhost:3000/cohorts/all');
+        const response = await axios.get(import.meta.env.BACKEND_URL + 'cohorts/all');
         setCohortOptions(response.data)
     } catch (error) {
         throw Error('Failed to fetch cohort data');

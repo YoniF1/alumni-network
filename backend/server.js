@@ -8,11 +8,13 @@ import cookieParser from 'cookie-parser'
 
 dotenv.config()
 
+const { FRONTEND_URL } = process.env
+
 const app = express()
 
 app.use(cors(
     {
-        origin: "http://localhost:5173",
+        origin: FRONTEND_URL,
         credentials: true
     }
 ))

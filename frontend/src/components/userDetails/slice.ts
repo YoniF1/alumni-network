@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk, Store  } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { StoreStateType } from '../../app/store'
 import axios from 'axios'
 // nanoid,
@@ -34,7 +34,7 @@ export const updateUserCohort = createAsyncThunk(
             step: state.userDetailsReducer.userdetails.step
         };
       const response = await axios.put(
-        `http://localhost:3000/users/${id}`,
+        import.meta.env.BACKEND_URL + `users/${id}`,
         userDetails
       );
       return response.data;
@@ -50,7 +50,7 @@ export const updateUserProfilePicAndBiography = createAsyncThunk(
             step
         };
 
-        const response = await axios.put(`http://localhost:3000/users/${id}`, userDetails);
+        const response = await axios.put(import.meta.env.BACKEND_URL + `/users/${id}`, userDetails);
         return response.data;
     }
 );

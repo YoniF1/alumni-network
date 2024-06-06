@@ -14,7 +14,7 @@ const Logout = () => {
 
   const logoutUser = async() => {
     try {
-        await axios.post('http://localhost:3000/logout', null, { withCredentials: true})
+        await axios.post(import.meta.env.BACKEND_URL + '/logout', null, { withCredentials: true})
         navigate('/login')
     } catch (error) {
         console.log('logging out', error)

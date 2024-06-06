@@ -17,7 +17,7 @@ const UserDetailsForm = () => {
 
   const fetchStepfromUser = async () => {
     try {
-        const response = await axios.get(`http://localhost:3000/users/${user?.id}`);
+        const response = await axios.get(import.meta.env.BACKEND_URL + `/users/${user?.id}`);
         setStepHook(response.data.step)
     } catch (error) {
         console.log('Failed to fetch step', error)
@@ -43,7 +43,8 @@ const UserDetailsForm = () => {
             <Biography />
         }
         { stepHook === FINISHED_FORM && user?.isadmin &&
-            <Admin />
+            // <Admin /> 
+            <h2> admin component</h2>
         }
         { stepHook === FINISHED_FORM &&
             <h2>Form completed</h2>
