@@ -5,6 +5,7 @@ import userrouter from '../backend/routes/users.r.js'
 import cohortrouter from '../backend/routes/cohorts.r.js'
 import filesrouter from '../backend/routes/files.r.js'
 import cookieParser from 'cookie-parser'
+import path from 'path'
 
 dotenv.config()
 
