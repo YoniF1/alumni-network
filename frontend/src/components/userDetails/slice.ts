@@ -34,7 +34,7 @@ export const updateUserCohort = createAsyncThunk(
             step: state.userDetailsReducer.userdetails.step
         };
       const response = await axios.put(
-        import.meta.env.BACKEND_URL + `users/${id}`,
+        import.meta.env.VITE_BACKEND_URL + `/users/${id}`,
         userDetails
       );
       return response.data;
@@ -50,7 +50,7 @@ export const updateUserProfilePicAndBiography = createAsyncThunk(
             step
         };
 
-        const response = await axios.put(import.meta.env.BACKEND_URL + `/users/${id}`, userDetails);
+        const response = await axios.put(import.meta.env.VITE_BACKEND_URL + `/users/${id}`, userDetails);
         return response.data;
     }
 );

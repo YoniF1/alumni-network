@@ -17,7 +17,7 @@ const UserDetailsForm = () => {
 
   const fetchStepfromUser = async () => {
     try {
-        const response = await axios.get(import.meta.env.BACKEND_URL + `/users/${user?.id}`);
+        const response = await axios.get(import.meta.env.VITE_BACKEND_URL + `/users/${user?.id}`);
         setStepHook(response.data.step)
     } catch (error) {
         console.log('Failed to fetch step', error)

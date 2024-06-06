@@ -7,7 +7,7 @@ const ProfilePicture = () => {
   const [profilePic, setProfilePic] = useState<string>('')
   
   const fetchProfilePic = async() => {
-    const response = await axios.get(import.meta.env.BACKEND_URL + `/users/${user?.id}`)
+    const response = await axios.get(import.meta.env.VITE_BACKEND_URL + `/users/${user?.id}`)
     console.log(response.data)
     setProfilePic(response.data.profile_picture)
   }
