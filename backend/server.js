@@ -29,11 +29,11 @@ app.use(userrouter)
 app.use(cohortrouter)
 app.use(filesrouter)
 
-const buildDirectory = path.join(__dirname, '../frontend/build');
-app.use(express.static(buildDirectory));
+const distDirectory = path.join(__dirname, '../frontend/dist/')
+app.use(express.static(distDirectory))
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(buildDirectory, 'index.html'));
+  res.sendFile(path.join(distDirectory, 'index.html'))
 });
 
 app.listen(PORT || 3000, () => {
