@@ -24,7 +24,7 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
     const loginregister = async () => {
         if(page === 'Register') {
             try {
-                const response = await axios.post(import.meta.env.BACKEND_URL + '/register', {
+                const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/register', {
                     email, password, first_name, last_name
                 }, {withCredentials: true})
 
@@ -44,8 +44,9 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
             }
         } else {
             // on login
+            console.log("hellooo", import.meta.env.VITE_BACKEND_URL)
             try {
-                const response = await axios.post(import.meta.env.BACKEND_URL + '/login', {
+                const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/login', {
                     email, password
                 }, {withCredentials: true})
 

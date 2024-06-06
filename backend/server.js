@@ -6,6 +6,7 @@ import cohortrouter from '../backend/routes/cohorts.r.js'
 import filesrouter from '../backend/routes/files.r.js'
 import cookieParser from 'cookie-parser'
 import path from 'path'
+const __dirname = import.meta.dirname;
 
 dotenv.config()
 
@@ -29,7 +30,7 @@ app.use(cohortrouter)
 app.use(filesrouter)
 
 app.listen(PORT || 3000, () => {
-        console.log(`Server listing on ${PORT || 3000}`)
+        console.log(`Server listening on ${PORT || 3000}`)
     }
 )
 
