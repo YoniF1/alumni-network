@@ -39,7 +39,7 @@ const Cohort = () => {
         addCohortHook(cohort)
         if(user) {
             updateUserCohortHook(user.id)
-            alert('Request sent. An admin will review your cohort request.');
+            alert('Request sent. An admin will review your cohort request.')
         }
         setCohort("")
   }

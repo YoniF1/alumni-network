@@ -36,15 +36,11 @@ const UserDetailsForm = () => {
 
   return (
     <div className="container">
-        { stepHook === COHORT  &&
+        { stepHook === COHORT && !user?.isadmin &&
             <Cohort/>
         }
-        { stepHook === BIOGRAPHY &&
+        { (stepHook === BIOGRAPHY || user?.isadmin && stepHook===COHORT) &&
             <Biography />
-        }
-        { stepHook === FINISHED_FORM && user?.isadmin &&
-            // <Admin /> 
-            <h2> admin component</h2>
         }
         { stepHook === FINISHED_FORM &&
             <h2>Form completed</h2>
