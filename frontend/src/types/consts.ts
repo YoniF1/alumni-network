@@ -3,6 +3,8 @@ import { ReactNode } from "react";
 export interface AuthContextType {
     user: UserInterface | null,
     setUser: React.Dispatch<React.SetStateAction<UserInterface | null>>
+    token: string | null;
+    setToken: React.Dispatch<React.SetStateAction<string | null>>; 
 }
 
 export type UserInterface = {
@@ -21,4 +23,13 @@ export interface AuthProviderProps {
 export interface HomeProps {
     children: ReactNode;
 }
+
+export interface CohortUserDetails {
+    cohort_name: string | null,
+    id: number | null,
+    first_name: string | null,
+    last_name: string | null,
+    email: string | null,
+}
+
 

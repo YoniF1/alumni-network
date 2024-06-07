@@ -26,6 +26,7 @@ const Nav = () => {
             Alumni Network
           </Typography>
           <Stack direction='row' spacing={2}>
+            {user?.token && user.isadmin ? <Button component={Link} to='/admin' color="inherit">Admin</Button> : null }
             {user?.token ? <Button component={Link} to='/home' color="inherit">Home</Button> : null }
             <Button component={Link} to='/login' color="inherit">Login</Button>
             <Button component={Link} to='/register' color="inherit">Register</Button>
