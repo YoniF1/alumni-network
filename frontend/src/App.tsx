@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginRegister from './components/LoginRegister.tsx'
 import Logout from './components/Logout.tsx'
 import Nav from './components/Nav.tsx'
@@ -46,7 +46,7 @@ function App() {
               <Route path='/register' element={<LoginRegister page={"Register"}/>}/>
               <Route path='/logout' element={<Logout/>}/>
               <Route path='/home' element={<Auth><Home><UserDetailsForm/></Home></Auth>}/>
-              <Route path='/admin' element={<Auth><Admin/></Auth>}/>
+              <Route path='/admin' element={<Auth>{user && user.isadmin ? <Admin /> : <Navigate to="/login"/>}</Auth>}/>
             </Routes>
           </div>
       </AuthContext.Provider>
