@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from "react"
 import axios from 'axios'
 import { AuthContext } from "../App"
+import { Avatar } from "@mui/material"
 
 const ProfilePicture = () => {
   const { user } = useContext(AuthContext)
@@ -17,7 +18,7 @@ const ProfilePicture = () => {
   }, [profilePic])  
 
   return (
-        <img src={profilePic} style={{ width: '150px', height: '150px' }} alt="Profile Picture" />
+    <Avatar alt="Profile Picture" src={profilePic} sx={{ width: 150, height: 150 }}/>
   )
 }
 

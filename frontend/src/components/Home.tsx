@@ -32,7 +32,6 @@ const Home = ({children}: HomeProps) => {
       <div className='container'>
         {children}
       </div>  
-   
     </>
   );
 };

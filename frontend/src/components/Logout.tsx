@@ -9,12 +9,15 @@ const Logout = () => {
 
   useEffect(() => {
     logoutUser()
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
     setUser(null)
   }, [])
 
   const logoutUser = async() => {
     try {
         await axios.post(import.meta.env.VITE_BACKEND_URL + '/logout', null, { withCredentials: true})
+
         navigate('/login')
     } catch (error) {
         console.log('logging out', error)

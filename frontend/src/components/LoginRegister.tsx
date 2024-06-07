@@ -17,7 +17,7 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
 
     const [message, setMessage] = useState<string>('')
 
-    const { setUser } = useContext(AuthContext)
+    const { setUser, setToken } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -44,18 +44,20 @@ const LoginRegister = ({page}: LoginRegisterProps) => {
             }
         } else {
             // on login
-            console.log("hellooo", import.meta.env.VITE_BACKEND_URL)
             try {
                 const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/login', {
                     email, password
                 }, {withCredentials: true})
 
-                if(response.status === 200) {
-                    setMessage("")
-                    console.log(response.data)
-                    setUser(response.data)
-                    navigate('/home')
-                }
+                if (response.status === 200) {
+                    setMessage("");
+                    setUser(response.data);
+                    const token = response.data.token;
+                    setToken(token);
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                    navigate('/home');
+                  }
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                   const errorMessage = error.response?.data?.msg || 'An error occurred';

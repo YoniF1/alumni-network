@@ -61,7 +61,6 @@ const Biography = () => {
         return; 
       }
 
-
       alert('Profile updated successfully');
     } catch (error) {
       console.error('Error updating profile', error);
