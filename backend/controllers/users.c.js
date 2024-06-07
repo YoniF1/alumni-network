@@ -155,9 +155,7 @@ export const updateUser = async(req, res) => {
     try {
         const { id } = req.params
         let updatedUser = {};
-        console.log('hello')
 
-        
         if (req.body.cohort) {
             const cohort = req.body.cohort
             await db('users').update({cohort_id: cohort}).where({id: id})
@@ -166,7 +164,6 @@ export const updateUser = async(req, res) => {
 
         if (req.body.step) {
             const step = req.body.step
-            console.log(step)
             await db('users').update({step: step}).where({id: id})
             updatedUser.step = step
         }
@@ -178,6 +175,12 @@ export const updateUser = async(req, res) => {
             await db('users').update({ biography, profile_picture: profile_picture }).where({ id });
             updatedUser.profile_picture = profile_picture
             updatedUser.biography = biography
+        }
+
+        if (req.body.verifyRequest) {
+            const verifyRequest = req.body.verifyRequest
+            await db('users').update({isverified: verifyRequest}).where({id: id})
+            updatedUser.isverified = verifyRequest
         }
 
         res.status(200).json(updatedUser);
