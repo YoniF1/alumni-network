@@ -51,7 +51,7 @@ const Biography = () => {
       });
 
       if(user) {
-        updateProfilePicAndBioHook(user?.id, uploadResponse.data.url, biography, 3 ) // check this
+        updateProfilePicAndBioHook(user?.id, uploadResponse.data.url, biography, 3 )
       }
 
       setProfilePictureUrlHook(uploadResponse.data.url)

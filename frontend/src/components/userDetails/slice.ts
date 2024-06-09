@@ -1,14 +1,9 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { StoreStateType } from '../../app/store'
 import axios from 'axios'
+import { UserDetails } from '../../types/consts'
 // nanoid,
 
-interface UserDetails {
-    cohort: string | null
-    biography: string
-    profilePictureUrl: string | null
-    step: number
-}
 
 export type InitialStateType = {
     userdetails: UserDetails,
@@ -19,9 +14,11 @@ const initialState: InitialStateType = {
     status: '',
     userdetails: {
         cohort: null,
+        cohort_id: null,
         biography: '',
         profilePictureUrl: null,
         step: 1,
+        isverified: null
     },
 }
 
@@ -53,7 +50,21 @@ export const updateUserProfilePicAndBiography = createAsyncThunk(
         const response = await axios.put(import.meta.env.VITE_BACKEND_URL + `/users/${id}`, userDetails);
         return response.data;
     }
-);
+)
+
+export const findUserVerified = createAsyncThunk(
+    'userdetails/findUserVerified',
+    async (id: number) => {
+      const response = await axios.get(import.meta.env.VITE_BACKEND_URL + `/users/${id}`);
+      const user = response.data;
+  
+      if (user.isverified && user.cohort_id !== null) {
+        return user;
+      } else {
+        throw new Error('User is not verified or does not belong to a cohort');
+      }
+    }
+  );
 
 const userDetailsSlice = createSlice({
     name: 'userdetails',
@@ -99,6 +110,10 @@ const userDetailsSlice = createSlice({
         })
         .addCase(updateUserProfilePicAndBiography.rejected, (state) => {
             state.status = 'failed'
+        })
+        .addCase(findUserVerified.fulfilled, (state, action: PayloadAction<UserDetails>) => {
+            state.userdetails = action.payload;
+            state.status = 'succeeded';
         })
     }
 })

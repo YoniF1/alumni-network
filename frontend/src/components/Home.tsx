@@ -8,11 +8,6 @@ import { useProfilePic } from './userDetails/hooks';
 
 const Home = ({children}: HomeProps) => {
   const { user } = useContext(AuthContext);
-  const profilePictureUrl = useProfilePic()
-
-  useEffect(() => {
-    profilePictureUrl
-  }, [profilePictureUrl])
 
   return (
     <>
@@ -25,7 +20,7 @@ const Home = ({children}: HomeProps) => {
           )}
         </div>
         <div className='profile_pic'>
-          {profilePictureUrl ? <ProfilePicture/> : null}
+           <ProfilePicture/>
         </div>
       </div>
    

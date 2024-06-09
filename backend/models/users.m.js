@@ -50,7 +50,7 @@ export const _findUser = async(token) => {
 
 export const _showUser = async(id) => {
     try {
-        const user = await db('users').select('id', 'first_name', 'last_name', 'cohort_id', 'step', 'email', 'profile_picture').where({id}).first()
+        const user = await db('users').select('id', 'first_name', 'last_name', 'cohort_id', 'step', 'email', 'profile_picture', 'isverified').where({id}).first()
         return user || null
     } catch (error) {
         console.log("Error finding user with that id", error)
