@@ -1,10 +1,9 @@
 
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../App';
 import { HomeProps } from '../types/consts';
 import ProfilePicture from './ProfilePicture';
 import './Home.css'
-import { useProfilePic } from './userDetails/hooks';
 
 const Home = ({children}: HomeProps) => {
   const { user } = useContext(AuthContext);
