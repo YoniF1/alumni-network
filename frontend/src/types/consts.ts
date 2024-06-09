@@ -24,6 +24,15 @@ export interface HomeProps {
     children: ReactNode;
 }
 
+export interface UserDetails {
+  cohort: string | null
+  biography: string
+  profilePictureUrl: string | null
+  step: number
+  isverified: boolean | null
+  cohort_id: number | null
+}
+
 export interface CohortUserDetails {
     cohort_name: string | null,
     id: number | null,
@@ -32,4 +41,13 @@ export interface CohortUserDetails {
     email: string | null,
 }
 
-
+export interface PostAndUserDetails {
+    id: number | null;
+    content: string | null
+    title: string | null
+    user_id: number
+    cohort: number
+    created_at: Date
+    first_name: string
+    last_name: string
+  }

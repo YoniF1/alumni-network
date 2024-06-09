@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { createSelector } from "@reduxjs/toolkit";
 import { useAppSelector, useAppDispatch } from '../../app/store.ts'
-import { addCohort, addBiography, updateUserCohort, userDetailsState, setStep, setProfilePicture, updateUserProfilePicAndBiography} from "./slice.ts";
+import { addCohort, addBiography, updateUserCohort, userDetailsState, setStep, setProfilePicture, updateUserProfilePicAndBiography, findUserVerified} from "./slice.ts";
 
 
 export const useStep = () => {
@@ -16,6 +16,31 @@ export const useBiography = () => {
 export const useProfilePic = () => {
     return useAppSelector(createSelector([userDetailsState], (userdetails) => userdetails.profilePictureUrl))
 }
+
+export const useCohortVerified = () => {
+    return useAppSelector(
+      createSelector(
+        [userDetailsState],
+        (userdetails) => {
+          return {
+            isverified: userdetails.isverified,
+            hasCohort: userdetails.cohort_id !== null,
+            cohortId: userdetails.cohort_id
+          };
+        }
+      )
+    );
+  };
+
+export const useFindUserVerified = () => {
+    const dispatch = useAppDispatch();
+    return useCallback((id: number) => {
+        dispatch(findUserVerified(id));
+        }, [dispatch]
+    )
+
+}
+
 
 export const useSetStep = () => {
     const dispatch = useAppDispatch()

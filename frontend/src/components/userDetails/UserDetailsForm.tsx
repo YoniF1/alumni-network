@@ -1,10 +1,14 @@
 import Cohort from "./Cohort"
 import './UserDetailsForm.css'
-import { useSetStep, useStep } from "./hooks"
+import { useCohortVerified, useSetStep, useStep, useFindUserVerified } from "./hooks"
 import Biography from "./Biography.tsx"
 import { useEffect, useContext, } from "react"
 import { AuthContext } from "../../App.tsx"
 import axios from 'axios'
+import Posts from "../posts/Posts.tsx"
+import { Typography } from "@mui/material"
+import CircularProgress from '@mui/material/CircularProgress';
+import { useState } from 'react'
 
 const COHORT=1
 const BIOGRAPHY=2
@@ -14,6 +18,9 @@ const UserDetailsForm = () => {
   const stepHook = useStep() 
   const setStepHook = useSetStep()
   const { user } = useContext(AuthContext)
+  const { isverified, hasCohort, cohortId } = useCohortVerified()
+  const findUserVerified = useFindUserVerified()
+  const [cohortName, setCohortName] = useState('')
 
   const fetchStepfromUser = async () => {
     try {
@@ -24,15 +31,23 @@ const UserDetailsForm = () => {
     }
   }
 
+  const fetchCohortName = async () => {
+    const response = await axios.get(import.meta.env.VITE_BACKEND_URL + `/cohorts/${cohortId}/name`)
+    setCohortName(response.data.name)
+  }
+
   useEffect(() => {
     fetchStepfromUser()
+    if (user) {
+      findUserVerified(user?.id)
+    }
   }, []);
 
-  
-//   if (status==="loading") return <h2>Loading....</h2>
-
-//   if (status==="failed")
-//       return <h2>Something went wrong....</h2>
+  useEffect(() => {
+    if (hasCohort && isverified && cohortId) {
+      fetchCohortName()
+    }
+  }, [hasCohort, isverified, cohortId])
 
   return (
     <div className="container">
@@ -42,9 +57,18 @@ const UserDetailsForm = () => {
         { (stepHook === BIOGRAPHY || user?.isadmin && stepHook===COHORT) &&
             <Biography />
         }
-        { stepHook === FINISHED_FORM &&
-            <h2>Form completed</h2>
-        }
+        {stepHook === FINISHED_FORM && isverified && hasCohort && cohortName && (
+            <Posts cohortName={cohortName} />
+        )}
+
+
+        { (stepHook === FINISHED_FORM && !isverified && hasCohort && !user?.isadmin &&
+            <>
+              <Typography variant='h2'>Waiting for admin approval</Typography>
+              <CircularProgress />
+            </>
+            
+        )}
     </div>
   )
 }
