@@ -2,9 +2,10 @@ import { configureStore, combineReducers} from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import userDetailsReducer from "../components/userDetails/slice"
 import adminReducer from "../components/admin/slice"
+import postReducer from "../components/posts/slice"
 
 
-const combineReducersApp = combineReducers({userDetailsReducer, adminReducer})
+const combineReducersApp = combineReducers({userDetailsReducer, adminReducer, postReducer})
 
 const store = configureStore({
     reducer: combineReducersApp
