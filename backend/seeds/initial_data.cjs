@@ -12,13 +12,12 @@ const hash = bcrypt.hashSync(password + "", 10)
 
 exports.seed = async function(knex) {
   await knex('users').insert([
-    // { first_name: 'Ziv', last_name: 'Chen', email: 'ziv@email.com', password: hash, isadmin: true, step: 2 },
-    { first_name: 'David', last_name: 'Smith', email: 'david3@email.com', password: hash, isadmin: false},
-    { first_name: 'Harry', last_name: 'Potter', email: 'harry3@email.com', password: hash, cohort_id: 3, isadmin: false},
-    { first_name: 'Ron', last_name: 'Weasley', email: 'ron3@email.com', password: hash, cohort_id: 1, isadmin: false},
-    { first_name: 'Hermoine', last_name: 'Granger', email: 'hermoine3@email.com', password: hash, cohort_id: 2, isverified: false, isadmin: false}
+    { first_name: 'Ziv', last_name: 'Chen', email: 'ziv@email.com', password: hash, isadmin: true, step: 3, biography: `Hello I'm Ziv`, isverified: true, profile_picture: 'https://res.cloudinary.com/dfo5dyaua/image/upload/v1717932930/profile_pictures/frxr3ythr0a1plikokpr.webp',  },
+    { first_name: 'Yoni', last_name: 'F', email: 'yoni@email.com', password: hash, isadmin: true, step: 2},
+    { first_name: 'Harry', last_name: 'Potter', email: 'harry@email.com', password: hash, cohort_id: 10, isadmin: false, isverified:false, step:2},
+    { first_name: 'Ron', last_name: 'Weasley', email: 'ron@email.com', password: hash, cohort_id: 10, isadmin: false, isverified:false, step:2},
+    { first_name: 'Hermoine', last_name: 'Granger', email: 'hermoine@email.com', password: hash, cohort_id: 10, isverified: false, isadmin: false,step:2}
   ]);
-
 
 
   // await knex('cohort').insert([
