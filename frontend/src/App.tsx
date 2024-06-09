@@ -10,6 +10,7 @@ import './App.css'
 import { AuthContextType, UserInterface } from './types/consts'
 import UserDetailsForm from './components/userDetails/UserDetailsForm.tsx'
 import { useEffect } from 'react'
+import FrontPage from './components/FrontPage.tsx'
 
 const initialValue = {
   user: null,
@@ -42,6 +43,7 @@ function App() {
           <Nav/>
           <div>
             <Routes>
+              <Route path='/' element={<FrontPage/>}/>
               <Route path='/login' element={<LoginRegister page={"Login"}/>}/>
               <Route path='/register' element={<LoginRegister page={"Register"}/>}/>
               <Route path='/logout' element={<Logout/>}/>
