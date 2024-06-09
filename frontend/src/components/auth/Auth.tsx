@@ -49,7 +49,7 @@ const Auth = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     verify();
   }, [token]);
-
+  
   return redirect ? children : <LoginRegister page={"Login"} />
 };
 
