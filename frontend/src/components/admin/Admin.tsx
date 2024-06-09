@@ -16,7 +16,7 @@ const Admin = () => {
 
   return (
       <>
-          <h2>Check the cohort requests {user?.first_name} {user?.last_name}</h2>
+          <h2>Cohort requests {user?.first_name} {user?.last_name}</h2>
           <ProfilePicture/>
           <div className='container1'>
             <Table cohortUserDetails={cohortUserDetails} />
